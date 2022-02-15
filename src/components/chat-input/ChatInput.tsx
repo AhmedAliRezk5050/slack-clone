@@ -48,11 +48,15 @@ const ChatInputContainer = styled.div`
     > input {
       position: fixed;
       bottom: 30px;
-      width: 60%;
+      width: 90%;
       border: 1px solid gray;
       border-radius: 5px;
       padding: 20px;
       outline: none;
+
+      @media (min-width: 31.25em) {
+        width: 60%;
+      }
     }
 
     > button {

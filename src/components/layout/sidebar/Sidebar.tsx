@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
 import InboxIcon from '@mui/icons-material/Inbox';
@@ -8,7 +9,6 @@ import AppsIcon from '@mui/icons-material/Apps';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import CreateIcon from '@mui/icons-material/Create';
-import React from 'react';
 import styled from 'styled-components';
 import SidebarOption from '../../sidebar-option/SidebarOption';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -20,16 +20,22 @@ import { auth, db } from '../../../firebase/firebase';
 import { collection } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-function SideBar() {
+interface SideBarProps {
+  shown: boolean;
+}
+interface SidebarContainerProps {
+  shown: boolean;
+}
+
+const SideBar: FC<SideBarProps> = ({ shown = true }) => {
   const [fetchedRooms] = useCollection(collection(db, 'rooms'));
   const [user] = useAuthState(auth);
 
   return (
-    <SidebarContainer>
+    <SidebarContainer shown={shown}>
       <SidebarHeader>
         <SidebarInfo>
-          <h2>PAPA FAM HQ</h2>
-          {/*<span>PAPA FAM HQ</span>*/}
+          <h2>Slack</h2>
           <h3>
             <FiberManualRecordIcon />
             <span>{user?.displayName}</span>
@@ -55,18 +61,24 @@ function SideBar() {
         ))}
     </SidebarContainer>
   );
-}
+};
 
 export default SideBar;
-const SidebarContainer = styled.div`
+const SidebarContainer = styled.div<SidebarContainerProps>`
   background-color: var(--slack-color);
   color: white;
   flex: 0.3;
   max-width: 260px;
   min-width: 190px;
   border-top: 1px solid #49274b;
-  margin-top: 60px;
+  margin-top: 0;
   overflow: auto;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  min-height: 100vh;
+  left: ${(props) => (props.shown ? '0' : '-100%')};
+  transition: all 250ms ease-in;
   &::-webkit-scrollbar {
     width: 5px;
   }
@@ -76,6 +88,28 @@ const SidebarContainer = styled.div`
   > hr {
     margin: 10px 0;
     border: 1px solid #49274b;
+  }
+  @media (min-width: 37.5em) {
+    position: initial;
+    min-height: initial;
+    margin-top: 60px;
+  }
+  &::before {
+    content: '';
+    /* display: ${(props) => (props.shown ? 'block' : 'none')}; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 190px;
+    opacity: ${(props) => (props.shown ? '1' : '0')};
+    z-index: -20;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: all 100ms ${(props) => (props.shown ? '250ms' : '0')};
+    visibility: ${(props) => (props.shown ? 'visible' : 'hidden')};
+    @media (min-width: 37.5em) {
+      display: none;
+    }
   }
 `;
 const SidebarHeader = styled.div`

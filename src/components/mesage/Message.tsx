@@ -45,5 +45,3 @@ const MessageInfo = styled.div`
   }
 `;
 export default Message;
-
-//$0.scrollTop = $0.scrollHeight - $0.clientHeight;

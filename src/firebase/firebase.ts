@@ -20,15 +20,8 @@ const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore();
 
-// console.log('bedore');
-// (async () => {
-//   await setPersistence(getAuth(), browserSessionPersistence);
-// })();
-// console.log('after');
-// // setPersistence(getAuth(), { type: 'SESSION' });
 export const auth = getAuth();
 setPersistence(getAuth(), browserSessionPersistence);
-// console.log('after auth');
 
 export const provider = new GoogleAuthProvider();
 export const addRoom = async (name: string) => {
@@ -36,10 +29,5 @@ export const addRoom = async (name: string) => {
     const docRef = await addDoc(collection(db, 'rooms'), {
       name,
     });
-    console.log('Document written with ID: ', docRef.id);
-  } catch (e) {
-    console.error('Error adding document: ', e);
-  }
+  } catch (e) {}
 };
-
-// add()

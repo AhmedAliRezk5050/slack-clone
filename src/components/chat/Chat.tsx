@@ -101,7 +101,7 @@ const Chat: FC<ChatProps> = ({ roomId }) => {
 export default Chat;
 
 const ChatContainer = styled.div`
-  margin-top: 60px;
+  margin-top: 142px;
   flex: 1;
   padding: 20px;
   overflow-y: auto;
@@ -112,6 +112,9 @@ const ChatContainer = styled.div`
   &::-webkit-scrollbar-thumb {
     background: gray;
     border-radius: 20px;
+  }
+  @media (min-width: 28.125em) {
+    margin-top: 60px;
   }
 `;
 const Header = styled.div`

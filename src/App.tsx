@@ -1,6 +1,5 @@
-import React from 'react';
-import './App.css';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/layout/header/Header';
 import styled from 'styled-components';
 import Sidebar from './components/layout/sidebar/Sidebar';
@@ -11,11 +10,12 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase/firebase';
 import Login from './components/login/Login';
 import { CircularProgress } from '@mui/material';
+import MenuToggler from './components/menu-toggler/MenuToggler';
 
 function App() {
   const roomId = useAppSelector(selectRooId);
   const [user, loading, error] = useAuthState(auth);
-
+  const [sideBarVisible, setSideBarVisible] = useState(true);
   if (loading) {
     return (
       <AppLoading>
@@ -34,13 +34,18 @@ function App() {
         <>
           <Header />
           <AppBody>
-            <Sidebar />
+            <Sidebar shown={sideBarVisible} />
             <Routes>
               <Route
                 path='/'
                 element={<>{roomId && <Chat roomId={roomId} />}</>}
               />
             </Routes>
+            <MenuToggler
+              toggle={() => {
+                setSideBarVisible((prevState) => !prevState);
+              }}
+            />
           </AppBody>
         </>
       ) : (

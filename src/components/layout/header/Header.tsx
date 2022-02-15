@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Avatar } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -27,7 +26,7 @@ const Header = () => {
       </HeaderLeft>
       <HeaderSearch>
         <SearchIcon />
-        <input type='text' placeholder='Search PAPAFAM' />
+        <input type='text' placeholder='Search SLACK' />
       </HeaderSearch>
       <HeaderRight>
         <HelpOutlineIcon />
@@ -40,6 +39,8 @@ export default Header;
 
 const HeaderContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
   position: fixed;
   width: 100%;
   align-items: center;
@@ -47,13 +48,20 @@ const HeaderContainer = styled.div`
   padding: 10px;
   background-color: var(--slack-color);
   color: white;
+  @media (min-width: 28.125em) {
+    flex-direction: row;
+    gap: initial;
+  }
 `;
 
 const HeaderLeft = styled.div`
   flex: 0.3;
   display: flex;
   align-items: center;
-
+  gap: 1rem;
+  @media (min-width: 28.125em) {
+    gap: initial;
+  }
   // direct descendant only
   > .MuiSvgIcon-root {
     margin-left: auto;

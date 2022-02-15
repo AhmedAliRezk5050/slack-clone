@@ -1,9 +1,8 @@
-import styled from "styled-components";
-import { ReactNode, FC } from "react";
-import { addRoom } from "../../firebase/firebase";
-import { useDispatch } from "react-redux";
-import { enterRoom } from "../../redux/rooms-slice";
-import { useAppDispatch } from "../../hooks/redux-hooks";
+import styled from 'styled-components';
+import { ReactNode, FC } from 'react';
+import { addRoom } from '../../firebase/firebase';
+import { enterRoom } from '../../redux/rooms-slice';
+import { useAppDispatch } from '../../hooks/redux-hooks';
 
 interface SidebarOptionProps {
   id?: string;
@@ -20,7 +19,7 @@ const SidebarOption: FC<SidebarOptionProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const addChannel = async () => {
-    const channelName = prompt("Please enter the channel name");
+    const channelName = prompt('Please enter the channel name');
     if (channelName && channelName.trim()) {
       addRoom(channelName);
     }

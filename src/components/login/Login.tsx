@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { Button } from "@mui/material";
-import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../../firebase/firebase";
+import styled from 'styled-components';
+import { Button } from '@mui/material';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../../firebase/firebase';
 
 const Login = () => {
   const handleLogin = () => {
@@ -12,11 +12,11 @@ const Login = () => {
     <LoginContainer>
       <LoginInnerContainer>
         <img
-          src="https://cdn-icons-png.flaticon.com/512/2111/2111615.png"
-          alt=""
+          src='https://cdn-icons-png.flaticon.com/512/2111/2111615.png'
+          alt=''
         />
-        <h1>Sign in to the PAPA FAM</h1>
-        <p>papa.slack.com</p>
+        <h1>Sign in to Slack</h1>
+        <p>ahmed.slack.com</p>
         <Button onClick={handleLogin}>Sign in with Google</Button>
       </LoginInnerContainer>
     </LoginContainer>
